@@ -28,7 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         {/* Additional SEO tags can be added here */}
-
+<meta name="msvalidate.01" content="F5D5A440425F87F3A7CCC08D130D4A56" />
       </head>
       <body className={inter.className}>{children}</body>
     </html>
