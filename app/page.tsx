@@ -8,8 +8,8 @@ export default function Home() {
   const [mergedPdfUrl, setMergedPdfUrl] = useState<string | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      setFiles((prevFiles) => [...prevFiles, event.target.files![0]]);
+    if (event.target.files && event.target.files.length > 0) {
+      setFiles((prevFiles) => [...prevFiles, ...Array.from(event.target.files)]);
     }
   };
 
@@ -59,6 +59,7 @@ export default function Home() {
         type="file"
         accept="application/pdf"
         onChange={handleFileChange}
+        multiple
         className="mb-4"
       />
       <ul>
