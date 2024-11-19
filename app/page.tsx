@@ -65,19 +65,19 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center p-8 bg-gradient-to-br from-gray-100 to-gray-300">
-      <div className="w-full max-w-lg bg-white rounded-3xl shadow-2xl p-8">
-        <h1 className="text-4xl font-extrabold mb-8 text-center text-gray-800">PDF Merger</h1>
+    <main className="flex min-h-screen items-center justify-center p-8 bg-gradient-to-br from-macchiato-base to-macchiato-mantle">
+      <div className="w-full max-w-lg bg-macchiato-crust rounded-3xl shadow-2xl p-8">
+        <h1 className="text-4xl font-extrabold mb-8 text-center text-macchiato-text">PDF Merger</h1>
         <div
           {...getRootProps()}
           className={`w-full h-40 border-4 border-dashed rounded-xl flex flex-col justify-center items-center cursor-pointer transition 
-            ${isDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300 bg-gray-50'}`}
+            ${isDragActive ? 'border-macchiato-blue bg-macchiato-surface0' : 'border-macchiato-overlay0 bg-macchiato-surface0'}`}
         >
           <input {...getInputProps()} />
-          <AiOutlineCloudUpload size={50} className="text-gray-400 mb-3" />
-          <p className="text-gray-600">
+          <AiOutlineCloudUpload size={50} className="text-macchiato-overlay0 mb-3" />
+          <p className="text-macchiato-text">
             Drag & drop PDF files here, or{' '}
-            <span className="text-blue-600 underline">browse</span>
+            <span className="text-macchiato-blue underline">browse</span>
           </p>
         </div>
         {files.length > 0 && (
@@ -93,15 +93,15 @@ export default function Home() {
                     <Draggable key={`${file.name}-${index}`} draggableId={`${file.name}-${index}`} index={index}>
                       {(provided) => (
                         <li
-                          className="flex justify-between items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                          className="flex justify-between items-center p-4 bg-macchiato-surface0 rounded-lg shadow-sm hover:shadow-md transition-shadow"
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
                         >
-                          <span className="text-gray-700 truncate">{file.name}</span>
+                          <span className="text-macchiato-text truncate">{file.name}</span>
                           <button
                             onClick={() => removeFile(index)}
-                            className="text-red-500 hover:text-red-600"
+                            className="text-macchiato-red hover:text-macchiato-red-dark"
                           >
                             <AiOutlineDelete size={24} />
                           </button>
@@ -117,7 +117,7 @@ export default function Home() {
         )}
         <button
           onClick={mergePdfs}
-          className="w-full mt-6 px-5 py-3 bg-blue-600 text-white rounded-xl font-medium text-lg hover:bg-blue-700 transition"
+          className="w-full mt-6 px-5 py-3 bg-macchiato-blue text-macchiato-crust rounded-xl font-medium text-lg hover:bg-macchiato-blue-dark transition"
         >
           Merge PDFs
         </button>

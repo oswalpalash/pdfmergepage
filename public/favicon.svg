@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="48" height="48"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <!-- Background -->
+  <rect width="48" height="48" rx="8" ry="8" fill="#f44336"></rect>
+  
+  <!-- PDF Icon -->
+  <path d="M30 4H10C8.89 4 8 4.9 8 6v36c0 1.1.89 2 2 2h28c1.11 0 2-.9 2-2V14l-10-10z" fill="#fff"></path>
+  <path d="M30 4v10h10" fill="#f44336"></path>
+  
+  <!-- Merge Icon -->
+  <path d="M22 20h4v12h-4z" fill="#2196f3"></path>
+  <path d="M16 24h16v4H16z" fill="#2196f3"></path>
+</svg><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
+@media (prefers-color-scheme: dark) { :root { filter: none; } }
+</style></svg>

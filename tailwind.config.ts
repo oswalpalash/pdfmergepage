@@ -9,14 +9,22 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#1D4ED8",
-        secondary: "#9333EA",
-      },
-      fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
+        macchiato: {
+          base: '#24273a',
+          mantle: '#1e2030',
+          crust: '#181926',
+          text: '#cad3f5',
+          overlay0: '#6e738d',
+          surface0: '#363a4f',
+          blue: '#8aadf4',
+          red: '#ed8796',
+          'red-dark': '#b2555b',
+        },
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@catppuccin/tailwindcss'),
+  ],
 };
 export default config;
