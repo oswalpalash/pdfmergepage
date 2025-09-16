@@ -35,6 +35,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <link rel="manifest" href="/site.webmanifest" />
         {/* Additional SEO tags can be added here */}
       <meta name="msvalidate.01" content="F5D5A440425F87F3A7CCC08D130D4A56" />
+      <script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2884926940370507"
+        crossOrigin="anonymous"
+      ></script>
       </head>
       <body className={inter.className}>{children}</body>
     </html>
