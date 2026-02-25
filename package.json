@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "pseo:check": "node scripts/checkPseoQualityGates.mjs",
+    "pseo:matrix": "tsx scripts/exportPseoMatrix.ts",
     "pages:build": "npx @cloudflare/next-on-pages",
     "preview": "npm run pages:build && wrangler pages dev",
     "deploy": "npm run pages:build && wrangler pages deploy",
@@ -39,6 +40,7 @@
     "postcss": "^8",
     "rollup-plugin-node-polyfills": "^0.2.1",
     "tailwindcss": "^3.4.1",
+    "tsx": "^4.21.0",
     "typescript": "^5",
     "vercel": "^32.3.0",
     "wrangler": "^3.87.0"

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Manrope } from "next/font/google";
+import { websiteJsonLd } from "@/app/lib/jsonLd";
 import "./globals.css";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
@@ -37,6 +38,8 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const websiteSchema = websiteJsonLd();
+
   return (
     <html lang="en">
       <head>
@@ -49,6 +52,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="msvalidate.01" content="F5D5A440425F87F3A7CCC08D130D4A56" />
       </head>
       <body className={`${manrope.variable} font-sans`}>
+        <script
+          type="application/ld+json"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
         {children}
         <Script
           async

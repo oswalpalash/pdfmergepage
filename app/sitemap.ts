@@ -6,10 +6,19 @@ export const revalidate = 3600;
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 
-  return indexableLandingPages.map((page) => ({
+  const landingEntries = indexableLandingPages.map((page) => ({
     url: absoluteUrl(page.path),
     lastModified,
     changeFrequency: page.changeFrequency,
     priority: page.sitemapPriority,
   }));
+
+  const hubEntry = {
+    url: absoluteUrl("/merge-pdf-guides"),
+    lastModified,
+    changeFrequency: "weekly" as const,
+    priority: 0.72,
+  };
+
+  return [hubEntry, ...landingEntries];
 }

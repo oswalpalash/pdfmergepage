@@ -6,6 +6,7 @@ const root = process.cwd();
 const targetFiles = [
   "app/page.tsx",
   "app/[slug]/page.tsx",
+  "app/merge-pdf-guides/page.tsx",
   "components/PseoLandingPage.tsx",
   "components/PseoAnalyticsTracker.tsx",
   "app/sitemap.ts",
@@ -63,6 +64,21 @@ const requiredPatterns = [
     pattern: /pseo_merge_success/,
     reason: "merge conversion event",
   },
+  {
+    file: "app/layout.tsx",
+    pattern: /websiteJsonLd\(/,
+    reason: "website structured data",
+  },
+  {
+    file: "components/PseoLandingPage.tsx",
+    pattern: /merge-pdf-guides/,
+    reason: "guides hub internal linking",
+  },
+  {
+    file: "app/sitemap.ts",
+    pattern: /merge-pdf-guides/,
+    reason: "guides hub in sitemap",
+  },
 ];
 
 const errors = [];
@@ -98,6 +114,19 @@ if (fs.existsSync(templatePath)) {
   const siblingLinkCount = (source.match(/relatedPage\.path/g) || []).length;
   if (siblingLinkCount < 1) {
     errors.push("components/PseoLandingPage.tsx: related page internal links appear to be missing");
+  }
+}
+
+const matrixPath = path.join(root, "docs/pseo/keyword-matrix.csv");
+if (fs.existsSync(matrixPath)) {
+  const lines = fs
+    .readFileSync(matrixPath, "utf8")
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
+  const dataRows = Math.max(lines.length - 1, 0);
+  if (dataRows < 70) {
+    errors.push(`docs/pseo/keyword-matrix.csv: too few live rows (${dataRows}, expected >= 70)`);
   }
 }
 

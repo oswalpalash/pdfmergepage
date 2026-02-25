@@ -850,8 +850,291 @@ type ExpansionSeed = {
 function titleCase(value: string): string {
   return value
     .split(" ")
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .map((part) => {
+      const normalized = part.toLowerCase();
+      if (normalized === "pdf") return "PDF";
+      return normalized.charAt(0).toUpperCase() + normalized.slice(1);
+    })
     .join(" ");
+}
+
+function getVariantIndex(seedValue: string): number {
+  let total = 0;
+  for (const char of seedValue) total += char.charCodeAt(0);
+  return total % 3;
+}
+
+function getHeadlineSuffix(intent: LandingPage["intent"]): string {
+  switch (intent) {
+    case "brand":
+      return "Without Leaving Your Browser";
+    case "page-order":
+      return "with Precise Ordering";
+    case "privacy":
+      return "with Private Browser Processing";
+    case "use-case":
+      return "for Faster Submission Flows";
+    case "device":
+      return "on Device-Friendly Browsers";
+    case "workflow":
+      return "for Repeatable Workflows";
+    case "generic":
+    default:
+      return "Online in Minutes";
+  }
+}
+
+function getHeroSupport(intent: LandingPage["intent"]): string {
+  switch (intent) {
+    case "privacy":
+      return "This route emphasizes privacy-first execution while preserving a fast merge workflow and direct output control.";
+    case "page-order":
+      return "This route prioritizes sequence clarity so your final packet reads in the right order for reviewers.";
+    case "device":
+      return "This route is tuned for device-specific behavior and quick browser execution under deadline pressure.";
+    case "use-case":
+      return "This route is tuned for one concrete job-to-be-done so the final merged file is ready for submission.";
+    default:
+      return "Each route keeps the same proven flow: add PDFs, set sequence, and export one final file. Pick the page that matches your exact query intent for cleaner relevance signals.";
+  }
+}
+
+function getIntentValueProps(seed: ExpansionSeed): LandingSectionItem[] {
+  if (seed.intent === "page-order") {
+    return [
+      {
+        title: "Sequence-first assembly",
+        body: "Set packet flow before export so reviewers receive sections in the intended order.",
+      },
+      {
+        title: "Order corrections before output",
+        body: "Drag-and-drop sorting lets you fix sequence issues before generating the final file.",
+      },
+      {
+        title: "Cleaner review cycles",
+        body: "Correct ordering reduces back-and-forth when multiple stakeholders review the same packet.",
+      },
+    ];
+  }
+
+  if (seed.intent === "privacy") {
+    return [
+      {
+        title: "Privacy-aligned process",
+        body: "Use a browser-based workflow for sensitive packets that need controlled handling.",
+      },
+      {
+        title: "No account friction",
+        body: "Open the route and merge immediately without registration blockers.",
+      },
+      {
+        title: "One-file delivery",
+        body: "Export one consolidated PDF for cleaner secure handoffs.",
+      },
+    ];
+  }
+
+  if (seed.intent === "device") {
+    return [
+      {
+        title: "Device-friendly execution",
+        body: "Run the same merge flow across desktop and mobile browsers without separate software setup.",
+      },
+      {
+        title: "Quick ordering controls",
+        body: "Set the final file sequence from your current device and export immediately.",
+      },
+      {
+        title: "Consistent output",
+        body: "Generate one clean file ready for sharing, upload, or archive.",
+      },
+    ];
+  }
+
+  return [
+    {
+      title: "Intent-matched workflow",
+      body: `This route is tuned for ${seed.keyword} intent so users can take action immediately.`,
+    },
+    {
+      title: "Order control before export",
+      body: "Drag-and-drop sorting helps prevent packet order mistakes before generating output.",
+    },
+    {
+      title: "Fast final delivery",
+      body: "Export one merged PDF in a format ready for upload, sharing, or archival.",
+    },
+  ];
+}
+
+function getVariantWorkflow(seed: ExpansionSeed): WorkflowStep[] {
+  const variant = getVariantIndex(seed.slug);
+  if (variant === 1) {
+    return [
+      {
+        title: `Upload the full ${seed.keyword} set`,
+        detail: "Drop every required file at once so completeness checks happen in one pass.",
+      },
+      {
+        title: "Sort by reviewer flow",
+        detail: "Reorder files to match how stakeholders should consume the packet.",
+      },
+      {
+        title: "Export and rename",
+        detail: "Download one file and add project/date naming for operational clarity.",
+      },
+    ];
+  }
+
+  if (variant === 2) {
+    return [
+      {
+        title: "Queue source PDFs",
+        detail: "Add all documents involved in the task before touching ordering.",
+      },
+      {
+        title: "Lock final sequence",
+        detail: "Move files until cover pages, body, and appendices are in proper order.",
+      },
+      {
+        title: "Merge for delivery",
+        detail: "Export one packet-ready PDF and route it through your normal handoff channel.",
+      },
+    ];
+  }
+
+  return [
+    {
+      title: `Add source files for ${seed.keyword}`,
+      detail: "Drop all required PDFs into one queue so you can validate the full packet at once.",
+    },
+    {
+      title: "Set final reading sequence",
+      detail: "Reorder files to match reviewer flow, submission requirements, or section logic.",
+    },
+    {
+      title: "Merge and download",
+      detail: "Generate one final PDF and rename it with project/date context for clean handoffs.",
+    },
+  ];
+}
+
+function getVariantMistakes(seed: ExpansionSeed): MistakeFix[] {
+  const variant = getVariantIndex(seed.keyword);
+  if (variant === 1) {
+    return [
+      {
+        mistake: "Mixing draft and final documents",
+        fix: "Remove draft files before merge and keep only final-approved versions.",
+      },
+      {
+        mistake: "Sending multiple attachments after merging",
+        fix: "Use one merged output file for a single, controlled handoff artifact.",
+      },
+      {
+        mistake: "Skipping a naming standard",
+        fix: "Name exported files with owner + workflow + date to reduce version confusion.",
+      },
+    ];
+  }
+
+  if (variant === 2) {
+    return [
+      {
+        mistake: "Merging in the wrong sequence",
+        fix: "Place intro/summary sections first, then core docs, then appendices.",
+      },
+      {
+        mistake: "Forgetting to remove irrelevant pages",
+        fix: "Trim the source list before merge so the final output contains only required docs.",
+      },
+      {
+        mistake: "Rebuilding the packet from scratch on each edit",
+        fix: "Keep original source files organized so updates require only a quick reorder + merge pass.",
+      },
+    ];
+  }
+
+  return [
+    {
+      mistake: "Merging partial file sets",
+      fix: "Collect all required source PDFs first so the output is complete in one pass.",
+    },
+    {
+      mistake: "Ignoring sequence checks",
+      fix: "Review ordering once before merge to avoid downstream correction cycles.",
+    },
+    {
+      mistake: "Saving with a vague filename",
+      fix: "Use a descriptive filename including project, owner, and date.",
+    },
+  ];
+}
+
+function getVariantFaq(seed: ExpansionSeed): LandingFaq[] {
+  const variant = getVariantIndex(seed.slug + seed.keyword);
+  const shared = [
+    {
+      question: `Can I use this page specifically for "${seed.keyword}" intent?`,
+      answer: "Yes. This route is mapped to that query intent with direct tool access and matching copy.",
+    },
+    {
+      question: "Will my chosen file order be preserved?",
+      answer: "Yes. The merged output follows the exact order you set in the file list.",
+    },
+  ];
+
+  if (variant === 1) {
+    return [
+      ...shared,
+      {
+        question: "Can I rerun this workflow for another packet right away?",
+        answer: "Yes. You can repeat merge cycles for multiple packets in the same session.",
+      },
+      {
+        question: "Does this route include account signup requirements?",
+        answer: "No. You can execute merges immediately without account setup.",
+      },
+      {
+        question: "Can I use this for recurring team handoffs?",
+        answer: "Yes. The flow is designed for repeatable, high-frequency merge tasks.",
+      },
+    ];
+  }
+
+  if (variant === 2) {
+    return [
+      ...shared,
+      {
+        question: "Can I remove files before final export?",
+        answer: "Yes. Remove any unnecessary file from the list before clicking merge.",
+      },
+      {
+        question: "Is this workflow browser-based?",
+        answer: "Yes. The merge flow runs directly in-browser.",
+      },
+      {
+        question: "Can I use this when submission portals allow one file only?",
+        answer: "Yes. This is a common use case for the one-file output workflow.",
+      },
+    ];
+  }
+
+  return [
+    ...shared,
+    {
+      question: "Do I need to register before using this tool?",
+      answer: "No. You can merge files immediately without account creation.",
+    },
+    {
+      question: "Can I run this workflow multiple times?",
+      answer: "Yes. You can repeat merges for different document sets in the same session.",
+    },
+    {
+      question: "Is this merge flow browser-based?",
+      answer: "Yes. The workflow runs directly in your browser for fast execution.",
+    },
+  ];
 }
 
 function buildExpansionLanding(seed: ExpansionSeed): LandingPage {
@@ -868,78 +1151,17 @@ function buildExpansionLanding(seed: ExpansionSeed): LandingPage {
     intent: seed.intent,
     metaTitle: seed.metaTitle,
     metaDescription: seed.metaDescription,
-    h1: `${keywordTitle} with Browser-Based Output`,
+    h1: `${keywordTitle} ${getHeadlineSuffix(seed.intent)}`,
     heroDescription: `${seed.angle} Use this page to run ${seed.keyword} workflows without setup friction.`,
-    heroSupport:
-      "Each route keeps the same proven flow: add PDFs, set sequence, and export one final file. Pick the page that matches your exact query intent for cleaner relevance signals.",
+    heroSupport: getHeroSupport(seed.intent),
     primaryCtaLabel: seed.primaryCtaLabel,
     secondaryCtaLabel: seed.secondaryCtaLabel,
     audience: [...seed.audience],
-    valueProps: [
-      {
-        title: "Intent-matched workflow",
-        body: `This route is tuned for ${seed.keyword} intent so users can take action immediately.`,
-      },
-      {
-        title: "Order control before export",
-        body: "Drag-and-drop sorting helps prevent packet order mistakes before generating output.",
-      },
-      {
-        title: "Fast final delivery",
-        body: "Export one merged PDF in a format ready for upload, sharing, or archival.",
-      },
-    ],
-    workflow: [
-      {
-        title: `Add source files for ${seed.keyword}`,
-        detail: "Drop all required PDFs into one queue so you can validate the full packet at once.",
-      },
-      {
-        title: "Set final reading sequence",
-        detail: "Reorder files to match reviewer flow, submission requirements, or section logic.",
-      },
-      {
-        title: "Merge and download",
-        detail: "Generate one final PDF and rename it with project/date context for clean handoffs.",
-      },
-    ],
-    mistakes: [
-      {
-        mistake: "Merging partial file sets",
-        fix: "Collect all required source PDFs first so the output is complete in one pass.",
-      },
-      {
-        mistake: "Ignoring sequence checks",
-        fix: "Review ordering once before merge to avoid downstream correction cycles.",
-      },
-      {
-        mistake: "Saving with a vague filename",
-        fix: "Use a descriptive filename including project, owner, and date.",
-      },
-    ],
+    valueProps: getIntentValueProps(seed),
+    workflow: getVariantWorkflow(seed),
+    mistakes: getVariantMistakes(seed),
     useCases: [...seed.useCases],
-    faq: [
-      {
-        question: `Can I use this page specifically for "${seed.keyword}" intent?`,
-        answer: "Yes. This route is mapped to that query intent with direct tool access and matching copy.",
-      },
-      {
-        question: "Will my chosen file order be preserved?",
-        answer: "Yes. The merged output follows the exact order you set in the file list.",
-      },
-      {
-        question: "Do I need to register before using this tool?",
-        answer: "No. You can merge files immediately without account creation.",
-      },
-      {
-        question: "Can I run this workflow multiple times?",
-        answer: "Yes. You can repeat merges for different document sets in the same session.",
-      },
-      {
-        question: "Is this merge flow browser-based?",
-        answer: "Yes. The workflow runs directly in your browser for fast execution.",
-      },
-    ],
+    faq: getVariantFaq(seed),
     sitemapPriority: seed.sitemapPriority ?? 0.56,
     changeFrequency: "weekly",
   };
@@ -1428,8 +1650,432 @@ const expansionSeeds: ExpansionSeed[] = [
   },
 ];
 
-const expansionKeywordLandings: LandingPage[] = expansionSeeds.map(buildExpansionLanding);
-const keywordLandingPages: LandingPage[] = [...keywordLandings, ...expansionKeywordLandings];
+type QueryProfile = {
+  slug: string;
+  keyword: string;
+  intent: LandingPage["intent"];
+  metaTitle: string;
+  metaDescription: string;
+  angle: string;
+  primaryCtaLabel: string;
+  secondaryCtaLabel: string;
+  topicLabel: string;
+  sitemapPriority?: number;
+};
+
+function slugify(value: string): string {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function buildAudienceTriplet(topicLabel: string): [string, string, string] {
+  return [
+    `Teams consolidating ${topicLabel} from multiple contributors.`,
+    `Operators preparing ${topicLabel} for one-file submission flows.`,
+    `People standardizing ${topicLabel} handoffs before sharing externally.`,
+  ];
+}
+
+function buildUseCaseQuartet(topicLabel: string): [string, string, string, string] {
+  const title = titleCase(topicLabel);
+  return [
+    `${title} packet consolidation`,
+    `One-file ${topicLabel} submissions`,
+    `${title} stakeholder handoff bundles`,
+    `${title} archival documentation`,
+  ];
+}
+
+function buildSeedFromProfile(profile: QueryProfile): ExpansionSeed {
+  return {
+    id: profile.slug,
+    slug: profile.slug,
+    keyword: profile.keyword,
+    intent: profile.intent,
+    metaTitle: profile.metaTitle,
+    metaDescription: profile.metaDescription,
+    angle: profile.angle,
+    primaryCtaLabel: profile.primaryCtaLabel,
+    secondaryCtaLabel: profile.secondaryCtaLabel,
+    audience: buildAudienceTriplet(profile.topicLabel),
+    useCases: buildUseCaseQuartet(profile.topicLabel),
+    keywordVariants: [profile.keyword, `${profile.keyword} online`, `${profile.keyword} tool`],
+    sitemapPriority: profile.sitemapPriority,
+  };
+}
+
+const useCaseTopics = [
+  "contracts",
+  "bank statements",
+  "receipts",
+  "tax documents",
+  "resumes",
+  "cover letters",
+  "assignments",
+  "applications",
+  "onboarding documents",
+  "proposals",
+  "compliance documents",
+  "audit files",
+  "insurance claims",
+  "medical records",
+  "training manuals",
+] as const;
+
+const generatedUseCaseSeeds: ExpansionSeed[] = useCaseTopics.flatMap((topic) => {
+  const topicSlug = slugify(topic);
+  const topicTitle = titleCase(topic);
+  const audience = buildAudienceTriplet(`${topic} workflows`);
+  const useCases = buildUseCaseQuartet(topic);
+  return [
+    {
+      id: `merge-pdf-for-${topicSlug}`,
+      slug: `merge-pdf-for-${topicSlug}`,
+      keyword: `merge pdf for ${topic}`,
+      intent: "use-case",
+      metaTitle: `Merge PDF for ${topicTitle}`,
+      metaDescription: `Merge ${topic} PDFs into one ordered file for faster submission and review.`,
+      angle: `This route is tuned for ${topic} workflows where packet completeness and order matter.`,
+      primaryCtaLabel: `Merge ${topic} PDFs`,
+      secondaryCtaLabel: "Open merge documents route",
+      audience,
+      useCases,
+      keywordVariants: [`merge pdf for ${topic}`, `${topic} pdf merger`, `merge ${topic} pdf`],
+      sitemapPriority: 0.55,
+    },
+    {
+      id: `combine-pdf-for-${topicSlug}`,
+      slug: `combine-pdf-for-${topicSlug}`,
+      keyword: `combine pdf for ${topic}`,
+      intent: "use-case",
+      metaTitle: `Combine PDF for ${topicTitle}`,
+      metaDescription: `Combine ${topic} PDFs into one packet with drag-and-drop ordering before export.`,
+      angle: `Built for combine-style ${topic} queries where one clean output file is the objective.`,
+      primaryCtaLabel: `Combine ${topic} PDFs`,
+      secondaryCtaLabel: "Open merge PDF files route",
+      audience,
+      useCases,
+      keywordVariants: [`combine pdf for ${topic}`, `combine ${topic} pdf`, `${topic} pdf combine`],
+      sitemapPriority: 0.54,
+    },
+  ];
+});
+
+const featureProfiles: QueryProfile[] = [
+  {
+    slug: "merge-pdf-without-watermark",
+    keyword: "merge pdf without watermark",
+    intent: "workflow",
+    metaTitle: "Merge PDF Without Watermark",
+    metaDescription: "Merge PDF files without watermark overlays and keep a clean final output.",
+    angle: "This route addresses quality-sensitive workflows where clean exports are required.",
+    primaryCtaLabel: "Merge without watermark",
+    secondaryCtaLabel: "Open high-quality merge route",
+    topicLabel: "clean output workflows",
+    sitemapPriority: 0.57,
+  },
+  {
+    slug: "merge-pdf-without-software",
+    keyword: "merge pdf without software",
+    intent: "workflow",
+    metaTitle: "Merge PDF Without Installing Software",
+    metaDescription: "Merge PDF files in-browser without software installation.",
+    angle: "Targets no-install intent for managed devices and quick one-off tasks.",
+    primaryCtaLabel: "Merge without software",
+    secondaryCtaLabel: "Open merge PDF online",
+    topicLabel: "no-install workflows",
+    sitemapPriority: 0.56,
+  },
+  {
+    slug: "merge-pdf-in-browser",
+    keyword: "merge pdf in browser",
+    intent: "workflow",
+    metaTitle: "Merge PDF in Browser",
+    metaDescription: "Merge and reorder PDFs directly in your browser with instant file output.",
+    angle: "Built for browser-first users who want immediate execution.",
+    primaryCtaLabel: "Merge in browser",
+    secondaryCtaLabel: "Open merge PDF online",
+    topicLabel: "browser-based workflows",
+    sitemapPriority: 0.57,
+  },
+  {
+    slug: "fast-pdf-merger",
+    keyword: "fast pdf merger",
+    intent: "generic",
+    metaTitle: "Fast PDF Merger",
+    metaDescription: "Fast PDF merger flow for quick packet assembly and one-file download.",
+    angle: "Targets speed-driven intent where users want direct action with minimal friction.",
+    primaryCtaLabel: "Start fast merge",
+    secondaryCtaLabel: "Open pdfmerge route",
+    topicLabel: "speed-first merge tasks",
+    sitemapPriority: 0.58,
+  },
+  {
+    slug: "merge-large-pdf-files",
+    keyword: "merge large pdf files",
+    intent: "workflow",
+    metaTitle: "Merge Large PDF Files",
+    metaDescription: "Merge large PDF files into one ordered output for upload-ready delivery.",
+    angle: "Focused on larger packets where sequence integrity matters.",
+    primaryCtaLabel: "Merge large PDFs",
+    secondaryCtaLabel: "Open merge multiple PDF route",
+    topicLabel: "large packet workflows",
+    sitemapPriority: 0.56,
+  },
+  {
+    slug: "batch-pdf-merger",
+    keyword: "batch pdf merger",
+    intent: "workflow",
+    metaTitle: "Batch PDF Merger",
+    metaDescription: "Run a batch PDF merger workflow and export one consolidated file.",
+    angle: "Designed for repeated multi-file jobs across teams.",
+    primaryCtaLabel: "Run batch merge",
+    secondaryCtaLabel: "Open merge multiple PDF route",
+    topicLabel: "batch merge operations",
+    sitemapPriority: 0.57,
+  },
+  {
+    slug: "merge-two-pdf-files",
+    keyword: "merge two pdf files",
+    intent: "workflow",
+    metaTitle: "Merge Two PDF Files",
+    metaDescription: "Merge two PDF files in seconds with ordering control before download.",
+    angle: "Captures simple two-file intent with immediate conversion path.",
+    primaryCtaLabel: "Merge two PDFs",
+    secondaryCtaLabel: "Open PDF merge route",
+    topicLabel: "two-file merge tasks",
+    sitemapPriority: 0.56,
+  },
+  {
+    slug: "merge-three-pdf-files",
+    keyword: "merge three pdf files",
+    intent: "workflow",
+    metaTitle: "Merge Three PDF Files",
+    metaDescription: "Merge three PDF files into one clean output with drag-and-drop sequencing.",
+    angle: "Targets small-batch merge workflows with predictable order.",
+    primaryCtaLabel: "Merge three PDFs",
+    secondaryCtaLabel: "Open merge PDF files route",
+    topicLabel: "small-batch merge tasks",
+    sitemapPriority: 0.55,
+  },
+  {
+    slug: "merge-pdf-attachments",
+    keyword: "merge pdf attachments",
+    intent: "workflow",
+    metaTitle: "Merge PDF Attachments",
+    metaDescription: "Merge PDF attachments into one deliverable for cleaner communication.",
+    angle: "Built for email- and ticket-driven attachment consolidation tasks.",
+    primaryCtaLabel: "Merge attachments",
+    secondaryCtaLabel: "Open merge for email route",
+    topicLabel: "attachment consolidation workflows",
+    sitemapPriority: 0.56,
+  },
+  {
+    slug: "merge-pdf-for-email",
+    keyword: "merge pdf for email",
+    intent: "use-case",
+    metaTitle: "Merge PDF for Email",
+    metaDescription: "Merge PDF files into one email-ready attachment.",
+    angle: "Targets send-one-file communication workflows.",
+    primaryCtaLabel: "Create email-ready PDF",
+    secondaryCtaLabel: "Open merge attachments route",
+    topicLabel: "email handoff workflows",
+    sitemapPriority: 0.55,
+  },
+  {
+    slug: "merge-pdf-for-upload",
+    keyword: "merge pdf for upload",
+    intent: "use-case",
+    metaTitle: "Merge PDF for Upload",
+    metaDescription: "Merge PDFs into one upload-ready file for portals and forms.",
+    angle: "Built for portal workflows requiring one-file submissions.",
+    primaryCtaLabel: "Create upload-ready PDF",
+    secondaryCtaLabel: "Open merge documents route",
+    topicLabel: "portal upload workflows",
+    sitemapPriority: 0.56,
+  },
+  {
+    slug: "high-quality-pdf-merge",
+    keyword: "high quality pdf merge",
+    intent: "workflow",
+    metaTitle: "High Quality PDF Merge",
+    metaDescription: "High quality PDF merge flow for clean, ordered document packets.",
+    angle: "Targets quality-sensitive users preparing client-facing outputs.",
+    primaryCtaLabel: "Run high-quality merge",
+    secondaryCtaLabel: "Open merge without watermark route",
+    topicLabel: "quality-first document workflows",
+    sitemapPriority: 0.57,
+  },
+  {
+    slug: "secure-online-pdf-merge",
+    keyword: "secure online pdf merge",
+    intent: "privacy",
+    metaTitle: "Secure Online PDF Merge",
+    metaDescription: "Secure online PDF merge route with browser-based processing and order control.",
+    angle: "Captures security-sensitive online-intent queries.",
+    primaryCtaLabel: "Start secure online merge",
+    secondaryCtaLabel: "Open secure PDF merger",
+    topicLabel: "secure online workflows",
+    sitemapPriority: 0.58,
+  },
+  {
+    slug: "combine-pdf-online-free",
+    keyword: "combine pdf online free",
+    intent: "generic",
+    metaTitle: "Combine PDF Online Free",
+    metaDescription: "Combine PDF online free with drag-and-drop ordering and no signup.",
+    angle: "Matches cost-sensitive combine intent for direct action.",
+    primaryCtaLabel: "Combine PDF free",
+    secondaryCtaLabel: "Open free PDF merger",
+    topicLabel: "free combine workflows",
+    sitemapPriority: 0.57,
+  },
+  {
+    slug: "reorder-pdf-files-before-merge",
+    keyword: "reorder pdf files before merge",
+    intent: "page-order",
+    metaTitle: "Reorder PDF Files Before Merge",
+    metaDescription: "Reorder PDF files before merge to ensure correct packet sequence.",
+    angle: "Built for sequence-sensitive merges where order errors are costly.",
+    primaryCtaLabel: "Reorder then merge",
+    secondaryCtaLabel: "Open reorder and merge route",
+    topicLabel: "sequence-controlled workflows",
+    sitemapPriority: 0.58,
+  },
+  {
+    slug: "merge-pdf-and-save-as-one-file",
+    keyword: "merge pdf and save as one file",
+    intent: "workflow",
+    metaTitle: "Merge PDF and Save as One File",
+    metaDescription: "Merge PDF files and save as one file for cleaner submission workflows.",
+    angle: "Targets long-tail users describing the exact output they need.",
+    primaryCtaLabel: "Merge and save now",
+    secondaryCtaLabel: "Open merge documents route",
+    topicLabel: "single-output workflows",
+    sitemapPriority: 0.56,
+  },
+];
+
+const deviceProfiles: QueryProfile[] = [
+  {
+    slug: "merge-pdf-on-iphone",
+    keyword: "merge pdf on iphone",
+    intent: "device",
+    metaTitle: "Merge PDF on iPhone",
+    metaDescription: "Merge PDF on iPhone directly in your browser with drag-and-drop ordering.",
+    angle: "Targets iPhone-specific merge intent with no app install requirement.",
+    primaryCtaLabel: "Merge on iPhone",
+    secondaryCtaLabel: "Open merge on mobile",
+    topicLabel: "iPhone merge workflows",
+    sitemapPriority: 0.54,
+  },
+  {
+    slug: "merge-pdf-on-android",
+    keyword: "merge pdf on android",
+    intent: "device",
+    metaTitle: "Merge PDF on Android",
+    metaDescription: "Merge PDF on Android in-browser and download one final file.",
+    angle: "Built for Android users needing quick browser-based execution.",
+    primaryCtaLabel: "Merge on Android",
+    secondaryCtaLabel: "Open merge on mobile",
+    topicLabel: "Android merge workflows",
+    sitemapPriority: 0.54,
+  },
+  {
+    slug: "merge-pdf-on-ipad",
+    keyword: "merge pdf on ipad",
+    intent: "device",
+    metaTitle: "Merge PDF on iPad",
+    metaDescription: "Merge PDF on iPad with easy file reordering and one-file output.",
+    angle: "Targets tablet-first users running document tasks on iPad.",
+    primaryCtaLabel: "Merge on iPad",
+    secondaryCtaLabel: "Open merge on mobile",
+    topicLabel: "iPad merge workflows",
+    sitemapPriority: 0.53,
+  },
+  {
+    slug: "merge-pdf-on-chromebook",
+    keyword: "merge pdf on chromebook",
+    intent: "device",
+    metaTitle: "Merge PDF on Chromebook",
+    metaDescription: "Merge PDF on Chromebook in-browser without software installs.",
+    angle: "Built for education and browser-only Chromebook environments.",
+    primaryCtaLabel: "Merge on Chromebook",
+    secondaryCtaLabel: "Open merge PDF online",
+    topicLabel: "Chromebook merge workflows",
+    sitemapPriority: 0.53,
+  },
+  {
+    slug: "merge-pdf-on-linux",
+    keyword: "merge pdf on linux",
+    intent: "device",
+    metaTitle: "Merge PDF on Linux",
+    metaDescription: "Merge PDF on Linux using a browser-based drag-and-drop workflow.",
+    angle: "Targets Linux users who prefer web tools for one-off merge tasks.",
+    primaryCtaLabel: "Merge on Linux",
+    secondaryCtaLabel: "Open merge PDF online",
+    topicLabel: "Linux merge workflows",
+    sitemapPriority: 0.53,
+  },
+  {
+    slug: "merge-pdf-in-safari",
+    keyword: "merge pdf in safari",
+    intent: "device",
+    metaTitle: "Merge PDF in Safari",
+    metaDescription: "Merge PDF in Safari browser and export one ordered output file.",
+    angle: "Targets Safari-specific browser intent with direct merge flow.",
+    primaryCtaLabel: "Merge in Safari",
+    secondaryCtaLabel: "Open merge on Mac",
+    topicLabel: "Safari browser workflows",
+    sitemapPriority: 0.52,
+  },
+  {
+    slug: "merge-pdf-in-chrome",
+    keyword: "merge pdf in chrome",
+    intent: "device",
+    metaTitle: "Merge PDF in Chrome",
+    metaDescription: "Merge PDF in Chrome with drag-and-drop ordering and one-file download.",
+    angle: "Built for Chrome users seeking fast in-browser merge execution.",
+    primaryCtaLabel: "Merge in Chrome",
+    secondaryCtaLabel: "Open merge PDF online",
+    topicLabel: "Chrome browser workflows",
+    sitemapPriority: 0.52,
+  },
+];
+
+function dedupeSeedsBySlug(seeds: ExpansionSeed[]): ExpansionSeed[] {
+  const seen = new Set<string>();
+  return seeds.filter((seed) => {
+    if (seen.has(seed.slug)) return false;
+    seen.add(seed.slug);
+    return true;
+  });
+}
+
+function dedupeLandingPagesByPath(pages: LandingPage[]): LandingPage[] {
+  const seen = new Set<string>();
+  return pages.filter((page) => {
+    if (seen.has(page.path)) return false;
+    seen.add(page.path);
+    return true;
+  });
+}
+
+const generatedProgrammaticSeeds: ExpansionSeed[] = [
+  ...generatedUseCaseSeeds,
+  ...featureProfiles.map(buildSeedFromProfile),
+  ...deviceProfiles.map(buildSeedFromProfile),
+];
+
+const allExpansionSeeds = dedupeSeedsBySlug([...expansionSeeds, ...generatedProgrammaticSeeds]);
+const expansionKeywordLandings: LandingPage[] = allExpansionSeeds.map(buildExpansionLanding);
+const keywordLandingPages: LandingPage[] = dedupeLandingPagesByPath([
+  ...keywordLandings,
+  ...expansionKeywordLandings,
+]);
 
 export const allLandingPages: LandingPage[] = [homeLanding, ...keywordLandingPages];
 export const indexableLandingPages: LandingPage[] = allLandingPages;
@@ -1449,6 +2095,10 @@ export function absoluteUrl(path: string): string {
 
 export function getHomeLandingPage(): LandingPage {
   return homeLanding;
+}
+
+export function getKeywordLandingPages(): LandingPage[] {
+  return keywordLandingPages;
 }
 
 export function getKeywordLandingPageBySlug(slug: string): LandingPage | null {

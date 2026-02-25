@@ -48,30 +48,43 @@ export function howToJsonLd(payload: HowToPayload) {
   } as const;
 }
 
-export function breadcrumbJsonLd(path: string, name: string) {
+export function breadcrumbJsonLd(path: string, name: string, parent?: { path: string; name: string }) {
   const canonical = `${SITE_URL}${path === "/" ? "" : path}`;
+  const items = [
+    {
+      "@type": "ListItem",
+      position: 1,
+      item: {
+        "@id": SITE_URL,
+        name: "pdfmerge.page",
+      },
+    },
+  ];
+
+  if (parent) {
+    items.push({
+      "@type": "ListItem",
+      position: 2,
+      item: {
+        "@id": `${SITE_URL}${parent.path === "/" ? "" : parent.path}`,
+        name: parent.name,
+      },
+    });
+  }
+
+  items.push({
+    "@type": "ListItem",
+    position: parent ? 3 : 2,
+    item: {
+      "@id": canonical,
+      name,
+    },
+  });
 
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        item: {
-          "@id": SITE_URL,
-          name: "pdfmerge.page",
-        },
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        item: {
-          "@id": canonical,
-          name,
-        },
-      },
-    ],
+    itemListElement: items,
   } as const;
 }
 
@@ -102,5 +115,19 @@ export function softwareApplicationJsonLd(payload: SoftwareApplicationPayload) {
       "Drag-and-drop file reordering before merge",
       "Browser-based local processing",
     ],
+  } as const;
+}
+
+export function websiteJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    url: SITE_URL,
+    name: "pdfmerge.page",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${SITE_URL}/merge-pdf-guides?q={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
   } as const;
 }

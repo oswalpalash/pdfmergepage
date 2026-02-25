@@ -1,7 +1,10 @@
 # GSC and Conversion Monitoring
 
 ## What is live now
-- 28 indexable pSEO routes (homepage + 27 keyword landings).
+- 82 indexable routes:
+  - homepage,
+  - 80 keyword landings,
+  - 1 guides hub (`/merge-pdf-guides`).
 - Route-level event instrumentation for:
   - `pseo_landing_view`
   - `pseo_cta_click`

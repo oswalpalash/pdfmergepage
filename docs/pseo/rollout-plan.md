@@ -25,6 +25,7 @@
 
 ## Phase 2 (completed in this update)
 - Expanded and published all planned phase-2 routes from `docs/pseo/keyword-matrix.csv`.
+- Current inventory: 80 keyword routes + homepage + guides hub.
 - Added route-level pSEO analytics events:
   - `pseo_landing_view`
   - `pseo_cta_click`
@@ -33,6 +34,7 @@
   - `pseo_merge_success`
   - `pseo_merge_failed`
 - Wired click instrumentation through data attributes so CTA and internal-link behavior can be measured without refactoring page templates.
+- Added `/merge-pdf-guides` hub for stronger internal-link architecture and crawl discoverability.
 
 ## Phase 3 (ongoing)
 - Monthly content refresh:

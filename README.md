@@ -5,12 +5,14 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`c3`](https:
 The project now includes a pSEO landing cluster focused on high-impression and expansion queries for `pdfmerge.page`.
 
 - Live landing pages:
-  - Core: `/pdfmerge`, `/pdfmerger`, `/pdf-merge`, `/pdf-merger`, `/pdf-page-merge`, `/pdf-page-merger`, `/merge-pdf-pages`
-  - Expansion: `/merge-pdf-files`, `/combine-pdf-files`, `/merge-pdf-online`, `/combine-pdf-pages`, `/merge-multiple-pdf`, `/merge-pdf-docs`, `/pdf-combine-online`, `/merge-scanned-pdf`, `/merge-documents-into-one-pdf`, `/reorder-and-merge-pdf`, `/secure-pdf-merger`, `/private-pdf-merger`, `/free-pdf-merger`, `/no-signup-pdf-merger`, `/merge-pdf-for-invoices`, `/merge-pdf-for-reports`, `/merge-pdf-for-legal-documents`, `/merge-pdf-on-mobile`, `/merge-pdf-on-mac`, `/merge-pdf-on-windows`
+  - Core: 7 seed routes from current GSC winners
+  - Expansion: 70+ additional high-intent routes across use-case, workflow, privacy, and device clusters
+  - Navigation hub: `/merge-pdf-guides`
 - Shared landing template: `components/PseoLandingPage.tsx`
 - Keyword/source-of-truth config: `app/lib/pseo.ts`
 - Sitemap/robots routes: `app/sitemap.ts`, `app/robots.ts`
 - pSEO planning assets: `docs/pseo/*`
+- Google-aligned guidance notes: `docs/pseo/google-best-practices.md`
 - Quality gate: `npm run pseo:check`
 
 ## Getting Started

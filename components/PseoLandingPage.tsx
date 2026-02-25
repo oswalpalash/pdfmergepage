@@ -24,7 +24,11 @@ export function PseoLandingPage({ page, relatedPages }: PseoLandingPageProps) {
     path: page.path,
     steps: page.workflow.map((step) => ({ title: step.title, detail: step.detail })),
   });
-  const breadcrumbSchema = breadcrumbJsonLd(page.path, page.h1);
+  const breadcrumbSchema = breadcrumbJsonLd(
+    page.path,
+    page.h1,
+    page.slug ? { path: "/merge-pdf-guides", name: "PDF Merge Guides" } : undefined,
+  );
   const softwareSchema = softwareApplicationJsonLd({
     name: "pdfmerge.page",
     description: page.metaDescription,
@@ -63,6 +67,15 @@ export function PseoLandingPage({ page, relatedPages }: PseoLandingPageProps) {
                 {page.secondaryCtaLabel}
               </Link>
             ) : null}
+            <Link
+              href="/merge-pdf-guides"
+              data-pseo-event="pseo_internal_link_click"
+              data-pseo-location="hero_guides_hub"
+              data-pseo-label="Browse all merge guides"
+              className="inline-flex items-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-100"
+            >
+              Browse all merge guides
+            </Link>
           </div>
           <div className="mt-6 flex flex-wrap gap-2 text-xs text-slate-500">
             <span className="rounded-full bg-slate-100 px-3 py-1">Keyword: {page.keyword}</span>
@@ -159,6 +172,19 @@ export function PseoLandingPage({ page, relatedPages }: PseoLandingPageProps) {
           <p className="mt-2 text-sm text-slate-600">
             Explore adjacent intent pages for broader keyword coverage and clearer crawl pathways.
           </p>
+          <p className="mt-1 text-sm text-slate-600">
+            Need the full map?{" "}
+            <Link
+              href="/merge-pdf-guides"
+              data-pseo-event="pseo_internal_link_click"
+              data-pseo-location="related_pages_hub_link"
+              data-pseo-label="PDF Merge Guides hub"
+              className="font-semibold text-slate-800 underline decoration-slate-300 underline-offset-4 transition hover:decoration-slate-500"
+            >
+              Open the PDF Merge Guides hub
+            </Link>
+            .
+          </p>
           <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {relatedPages.map((relatedPage) => (
               <li key={relatedPage.id}>
@@ -200,6 +226,15 @@ export function PseoLandingPage({ page, relatedPages }: PseoLandingPageProps) {
               className="inline-flex items-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-100"
             >
               Open main merge page
+            </Link>
+            <Link
+              href="/merge-pdf-guides"
+              data-pseo-event="pseo_internal_link_click"
+              data-pseo-location="next_steps_guides_hub"
+              data-pseo-label="Browse all merge guides"
+              className="inline-flex items-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-100"
+            >
+              Browse all merge guides
             </Link>
           </div>
         </section>
