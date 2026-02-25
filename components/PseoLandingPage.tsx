@@ -36,56 +36,125 @@ export function PseoLandingPage({ page, relatedPages }: PseoLandingPageProps) {
   });
 
   const secondaryLink = relatedPages[0];
+  const sectionCardClass =
+    "rounded-[24px] border border-slate-200/80 bg-white/92 p-6 shadow-[0_22px_55px_-45px_rgba(15,23,42,0.6)] backdrop-blur sm:p-8";
+  const sectionHeadingClass = "text-2xl font-extrabold tracking-tight text-slate-900";
 
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_#e0f2fe,_#f8fafc_55%,_#f1f5f9)] pb-16 text-slate-900">
+    <main className="relative min-h-screen overflow-hidden bg-[#f6f8fc] pb-20 text-slate-900">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-[-240px] top-[-120px] h-[420px] w-[420px] rounded-full bg-sky-200/50 blur-3xl" />
+        <div className="absolute right-[-220px] top-[180px] h-[360px] w-[360px] rounded-full bg-blue-200/45 blur-3xl" />
+        <div className="absolute bottom-[-200px] left-1/2 h-[380px] w-[380px] -translate-x-1/2 rounded-full bg-indigo-100/40 blur-3xl" />
+      </div>
+
       <PseoAnalyticsTracker context={analyticsContext} />
-      <div className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
-        <header className="rounded-3xl border border-slate-200 bg-white/85 p-8 shadow-2xl shadow-slate-900/5 backdrop-blur">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">Programmatic SEO Landing</p>
-          <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">{page.h1}</h1>
-          <p className="mt-4 text-base leading-relaxed text-slate-700">{page.heroDescription}</p>
-          <p className="mt-3 text-sm leading-relaxed text-slate-600">{page.heroSupport}</p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <a
-              href="#merge-tool"
-              data-pseo-event="pseo_cta_click"
-              data-pseo-location="hero_primary"
-              data-pseo-label={page.primaryCtaLabel}
-              className="inline-flex items-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-700"
-            >
-              {page.primaryCtaLabel}
+      <header className="sticky top-0 z-50 border-b border-slate-200/75 bg-white/75 backdrop-blur-md">
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-3">
+            <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#137fec] text-xs font-black text-white">
+              PDF
+            </span>
+            <p className="text-lg font-extrabold tracking-tight text-slate-900">PDFMerge</p>
+          </div>
+          <nav className="hidden items-center gap-6 text-sm font-semibold text-slate-600 md:flex">
+            <a href="#merge-tool" className="transition hover:text-[#137fec]">
+              Tool
             </a>
-            {secondaryLink ? (
-              <Link
-                href={secondaryLink.path}
-                data-pseo-event="pseo_cta_click"
-                data-pseo-location="hero_secondary"
-                data-pseo-label={page.secondaryCtaLabel}
-                className="inline-flex items-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-100"
-              >
-                {page.secondaryCtaLabel}
-              </Link>
-            ) : null}
             <Link
               href="/merge-pdf-guides"
               data-pseo-event="pseo_internal_link_click"
-              data-pseo-location="hero_guides_hub"
+              data-pseo-location="header_guides_hub"
               data-pseo-label="Browse all merge guides"
-              className="inline-flex items-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-100"
+              className="transition hover:text-[#137fec]"
             >
-              Browse all merge guides
+              Guides
             </Link>
+            <Link href="/" className="transition hover:text-[#137fec]">
+              Home
+            </Link>
+          </nav>
+          <a
+            href="#merge-tool"
+            data-pseo-event="pseo_cta_click"
+            data-pseo-location="header_primary"
+            data-pseo-label={page.primaryCtaLabel}
+            className="inline-flex items-center rounded-lg bg-[#137fec] px-4 py-2 text-sm font-bold text-white transition hover:bg-blue-600"
+          >
+            {page.primaryCtaLabel}
+          </a>
+        </div>
+      </header>
+
+      <div className="relative mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+        <section className="relative overflow-hidden rounded-[28px] border border-slate-200/80 bg-white/90 p-7 shadow-[0_35px_90px_-60px_rgba(15,23,42,0.7)] backdrop-blur sm:p-10">
+          <div className="pointer-events-none absolute inset-0">
+            <div className="absolute right-[-110px] top-[-90px] h-60 w-60 rounded-full bg-blue-100/70 blur-3xl" />
+            <div className="absolute bottom-[-120px] left-[-80px] h-56 w-56 rounded-full bg-sky-100/70 blur-3xl" />
           </div>
-          <div className="mt-6 flex flex-wrap gap-2 text-xs text-slate-500">
-            <span className="rounded-full bg-slate-100 px-3 py-1">Keyword: {page.keyword}</span>
-            <span className="rounded-full bg-slate-100 px-3 py-1">Intent: {page.intent}</span>
-            {page.impressions > 0 ? (
-              <span className="rounded-full bg-slate-100 px-3 py-1">{page.impressions} tracked impressions</span>
-            ) : null}
-            <span className="rounded-full bg-slate-100 px-3 py-1">Canonical: {absoluteUrl(page.path)}</span>
+          <div className="relative grid gap-8 lg:grid-cols-[minmax(0,1fr)_17rem]">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-sky-700">Programmatic SEO Landing</p>
+              <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">{page.h1}</h1>
+              <p className="mt-4 text-base leading-relaxed text-slate-700">{page.heroDescription}</p>
+              <p className="mt-3 text-sm leading-relaxed text-slate-600">{page.heroSupport}</p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <a
+                  href="#merge-tool"
+                  data-pseo-event="pseo_cta_click"
+                  data-pseo-location="hero_primary"
+                  data-pseo-label={page.primaryCtaLabel}
+                  className="inline-flex items-center rounded-xl bg-[#137fec] px-5 py-3 text-sm font-bold text-white transition hover:bg-blue-600"
+                >
+                  {page.primaryCtaLabel}
+                </a>
+                {secondaryLink ? (
+                  <Link
+                    href={secondaryLink.path}
+                    data-pseo-event="pseo_cta_click"
+                    data-pseo-location="hero_secondary"
+                    data-pseo-label={page.secondaryCtaLabel}
+                    className="inline-flex items-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-100"
+                  >
+                    {page.secondaryCtaLabel}
+                  </Link>
+                ) : null}
+                <Link
+                  href="/merge-pdf-guides"
+                  data-pseo-event="pseo_internal_link_click"
+                  data-pseo-location="hero_guides_hub"
+                  data-pseo-label="Browse all merge guides"
+                  className="inline-flex items-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-100"
+                >
+                  Browse all merge guides
+                </Link>
+              </div>
+              <div className="mt-6 flex flex-wrap gap-2 text-xs text-slate-500">
+                <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1">Keyword: {page.keyword}</span>
+                <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1">Intent: {page.intent}</span>
+                {page.impressions > 0 ? (
+                  <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1">
+                    {page.impressions} tracked impressions
+                  </span>
+                ) : null}
+              </div>
+            </div>
+            <aside className="rounded-2xl border border-slate-200 bg-slate-50/85 p-4">
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">Page Metadata</p>
+              <ul className="mt-3 space-y-2 text-xs text-slate-700">
+                <li className="rounded-lg bg-white px-3 py-2">
+                  <span className="font-semibold text-slate-900">Canonical:</span> {absoluteUrl(page.path)}
+                </li>
+                <li className="rounded-lg bg-white px-3 py-2">
+                  <span className="font-semibold text-slate-900">Path:</span> {page.path}
+                </li>
+                <li className="rounded-lg bg-white px-3 py-2">
+                  <span className="font-semibold text-slate-900">Keyword family:</span> {page.keyword}
+                </li>
+              </ul>
+            </aside>
           </div>
-        </header>
+        </section>
 
         <div className="mt-8">
           <PdfMergeTool
@@ -96,22 +165,26 @@ export function PseoLandingPage({ page, relatedPages }: PseoLandingPageProps) {
           />
         </div>
 
-        <section className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-900/5 sm:p-8">
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900">Who this page is for</h2>
+        <section className={`mt-8 ${sectionCardClass}`}>
+          <h2 className={sectionHeadingClass}>Who this page is for</h2>
           <ul className="mt-4 space-y-3 text-sm leading-relaxed text-slate-700">
             {page.audience.map((item) => (
-              <li key={item} className="rounded-xl bg-slate-50 px-4 py-3">
+              <li key={item} className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
                 {item}
               </li>
             ))}
           </ul>
         </section>
 
-        <section className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-900/5 sm:p-8">
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900">Why this {page.keyword} page converts</h2>
+        <section className={`mt-8 ${sectionCardClass}`}>
+          <h2 className={sectionHeadingClass}>Why this {page.keyword} page converts</h2>
           <div className="mt-4 grid gap-4 md:grid-cols-3">
-            {page.valueProps.map((item) => (
-              <article key={item.title} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            {page.valueProps.map((item, index) => (
+              <article
+                key={item.title}
+                className="rounded-2xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-4"
+              >
+                <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">Benefit {index + 1}</p>
                 <h3 className="text-base font-semibold text-slate-900">{item.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-slate-700">{item.body}</p>
               </article>
@@ -119,8 +192,8 @@ export function PseoLandingPage({ page, relatedPages }: PseoLandingPageProps) {
           </div>
         </section>
 
-        <section className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-900/5 sm:p-8">
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900">3-step workflow for {page.keyword}</h2>
+        <section className={`mt-8 ${sectionCardClass}`}>
+          <h2 className={sectionHeadingClass}>3-step workflow for {page.keyword}</h2>
           <ol className="mt-5 grid gap-4 md:grid-cols-3">
             {page.workflow.map((step, index) => (
               <li key={step.title} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
@@ -132,8 +205,8 @@ export function PseoLandingPage({ page, relatedPages }: PseoLandingPageProps) {
           </ol>
         </section>
 
-        <section className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-900/5 sm:p-8">
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900">Common mistakes (and fixes)</h2>
+        <section className={`mt-8 ${sectionCardClass}`}>
+          <h2 className={sectionHeadingClass}>Common mistakes (and fixes)</h2>
           <div className="mt-4 grid gap-4 md:grid-cols-3">
             {page.mistakes.map((item) => (
               <article key={item.mistake} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
@@ -144,8 +217,8 @@ export function PseoLandingPage({ page, relatedPages }: PseoLandingPageProps) {
           </div>
         </section>
 
-        <section className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-900/5 sm:p-8">
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900">Best use cases for {page.keyword}</h2>
+        <section className={`mt-8 ${sectionCardClass}`}>
+          <h2 className={sectionHeadingClass}>Best use cases for {page.keyword}</h2>
           <ul className="mt-4 grid gap-3 text-sm text-slate-700 md:grid-cols-2">
             {page.useCases.map((item) => (
               <li key={item} className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
@@ -155,8 +228,8 @@ export function PseoLandingPage({ page, relatedPages }: PseoLandingPageProps) {
           </ul>
         </section>
 
-        <section className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-900/5 sm:p-8">
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900">FAQ</h2>
+        <section className={`mt-8 ${sectionCardClass}`}>
+          <h2 className={sectionHeadingClass}>FAQ</h2>
           <div className="mt-4 space-y-3">
             {page.faq.map((item) => (
               <details key={item.question} className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
@@ -167,8 +240,8 @@ export function PseoLandingPage({ page, relatedPages }: PseoLandingPageProps) {
           </div>
         </section>
 
-        <section className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-900/5 sm:p-8">
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900">Related PDF merge pages</h2>
+        <section className={`mt-8 ${sectionCardClass}`}>
+          <h2 className={sectionHeadingClass}>Related PDF merge pages</h2>
           <p className="mt-2 text-sm text-slate-600">
             Explore adjacent intent pages for broader keyword coverage and clearer crawl pathways.
           </p>
@@ -202,8 +275,8 @@ export function PseoLandingPage({ page, relatedPages }: PseoLandingPageProps) {
           </ul>
         </section>
 
-        <section className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-900/5 sm:p-8">
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900">Next steps</h2>
+        <section className={`mt-8 ${sectionCardClass}`}>
+          <h2 className={sectionHeadingClass}>Next steps</h2>
           <p className="mt-3 text-sm leading-relaxed text-slate-700">
             Use the merge tool above to ship your final PDF now. If you handle recurring merges, bookmark this route and
             the related intent pages so each workflow starts with the right template.

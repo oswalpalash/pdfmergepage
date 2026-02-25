@@ -4,6 +4,10 @@
 
 :root {
   color-scheme: light;
+  --app-bg: #f6f8fc;
+  --app-surface: #ffffff;
+  --app-primary: #137fec;
+  --app-text: #0f172a;
 }
 
 @layer utilities {
@@ -13,6 +17,15 @@
 }
 
 body {
-  @apply min-h-screen bg-slate-50 text-slate-900 antialiased;
+  @apply min-h-screen antialiased;
+  background-color: var(--app-bg);
+  background-image:
+    radial-gradient(1200px 460px at 12% -10%, rgba(19, 127, 236, 0.15), transparent 62%),
+    radial-gradient(1000px 500px at 100% 0%, rgba(56, 189, 248, 0.12), transparent 64%);
+  color: var(--app-text);
   font-family: var(--font-manrope), "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+::selection {
+  background: rgba(19, 127, 236, 0.24);
 }
