@@ -1,0 +1,25 @@
+# PDF Merge pSEO Technical Checklist
+
+- Add canonical metadata for every landing route (`alternates.canonical`).
+- Ensure each page has unique `title`, `description`, and `H1` aligned to one keyword intent.
+- Keep at least 6 meaningful H2 sections per landing page.
+- Include JSON-LD:
+  - `FAQPage`
+  - `HowTo`
+  - `BreadcrumbList`
+  - `SoftwareApplication`
+- Add all landing pages to `app/sitemap.ts`.
+- Publish `app/robots.ts` with sitemap URL.
+- Include at least 3 internal links to sibling pSEO pages on each route.
+- Ensure every route contains:
+  - immediate merge CTA,
+  - visible merge tool component,
+  - at least 3 mistake/fix bullets.
+- Keep pages fast by reusing the shared merge component.
+- Validate unknown slugs 404 correctly (`dynamicParams = false` + `notFound()`).
+- Monitor GSC metrics weekly:
+  - index coverage,
+  - impressions,
+  - CTR,
+  - query-to-page mapping for cannibalization.
+- Consolidate or noindex pages that stay low-value after 90 days.

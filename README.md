@@ -1,5 +1,18 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`c3`](https://developers.cloudflare.com/pages/get-started/c3).
 
+## Programmatic SEO setup
+
+The project now includes a pSEO landing cluster focused on high-impression and expansion queries for `pdfmerge.page`.
+
+- Live landing pages:
+  - Core: `/pdfmerge`, `/pdfmerger`, `/pdf-merge`, `/pdf-merger`, `/pdf-page-merge`, `/pdf-page-merger`, `/merge-pdf-pages`
+  - Expansion: `/merge-pdf-files`, `/combine-pdf-files`, `/merge-pdf-online`, `/combine-pdf-pages`, `/merge-multiple-pdf`, `/merge-pdf-docs`, `/pdf-combine-online`, `/merge-scanned-pdf`, `/merge-documents-into-one-pdf`, `/reorder-and-merge-pdf`, `/secure-pdf-merger`, `/private-pdf-merger`, `/free-pdf-merger`, `/no-signup-pdf-merger`, `/merge-pdf-for-invoices`, `/merge-pdf-for-reports`, `/merge-pdf-for-legal-documents`, `/merge-pdf-on-mobile`, `/merge-pdf-on-mac`, `/merge-pdf-on-windows`
+- Shared landing template: `components/PseoLandingPage.tsx`
+- Keyword/source-of-truth config: `app/lib/pseo.ts`
+- Sitemap/robots routes: `app/sitemap.ts`, `app/robots.ts`
+- pSEO planning assets: `docs/pseo/*`
+- Quality gate: `npm run pseo:check`
+
 ## Getting Started
 
 First, run the development server:

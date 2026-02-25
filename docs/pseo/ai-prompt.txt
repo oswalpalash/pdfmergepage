@@ -1,0 +1,36 @@
+You are writing a programmatic SEO landing page for pdfmerge.page.
+
+Goal:
+- Convert visitors searching "{primary_keyword}" into immediate merge-tool users.
+
+Required heading order:
+- H1: {primary_keyword} landing headline
+- H2: Who this page is for
+- H2: Why this {primary_keyword} page converts
+- H2: 3-step workflow for {primary_keyword}
+- H2: Common mistakes (and fixes)
+- H2: Best use cases for {primary_keyword}
+- H2: FAQ
+- H2: Related PDF merge pages
+- H2: Next steps
+
+Rules:
+- Keep 700-1,100 words.
+- Keep tone practical and action-oriented.
+- Do not invent statistics.
+- Mention that merge happens in-browser/local processing.
+- Include one primary CTA that jumps to merge tool.
+- Include one secondary CTA to another landing page.
+- Add at least 3 internal links with descriptive anchor text.
+- Use unique examples per page to prevent duplicate content patterns.
+
+Inputs:
+- primary_keyword: {primary_keyword}
+- search_intent: {intent}
+- cta_primary: {cta_primary}
+- cta_secondary: {cta_secondary}
+- related_pages: {related_pages}
+- use_case_bias: {use_case_bias}
+
+Output format:
+- Return markdown-ready content with the exact heading structure.

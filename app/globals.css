@@ -3,17 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+  color-scheme: light;
 }
 
 @layer utilities {
@@ -22,19 +12,7 @@
   }
 }
 
-h1, h2, h3, h4, h5, h6 {
-  @apply font-semibold text-gray-900;
-}
-
-a {
-  @apply text-blue-600 hover:underline;
-}
-
 body {
-  @apply bg-gradient-to-b from-gray-100 to-gray-200 text-gray-800;
-}
-
-@keyframes backgroundAnimation {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(360deg); }
+  @apply min-h-screen bg-slate-50 text-slate-900 antialiased;
+  font-family: var(--font-manrope), "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }

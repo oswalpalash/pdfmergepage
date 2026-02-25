@@ -1,25 +1,38 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import Script from "next/script";
+import { Manrope } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
 
 export const metadata: Metadata = {
-  title: "PDF Merge Page",
-  description: "Merge multiple PDF files into a single PDF file. Local and secure",
-  keywords: ["pdf", "merge", "page", "online"],
+  metadataBase: new URL("https://pdfmerge.page"),
+  title: {
+    default: "Merge PDF Files Online | pdfmerge.page",
+    template: "%s",
+  },
+  description: "Merge multiple PDF files into one document in your browser with drag-and-drop reordering.",
+  keywords: ["pdf merge", "pdfmerger", "merge pdf pages", "combine pdf files", "pdfmerge"],
   openGraph: {
-    title: "PDF Merge Page",
-    description: "Merge multiple PDF files into a single PDF file. Local and secure",
+    title: "Merge PDF Files Online | pdfmerge.page",
+    description: "Merge multiple PDF files into one document in your browser with drag-and-drop reordering.",
     url: "https://pdfmerge.page",
+    siteName: "pdfmerge.page",
+    type: "website",
     images: [
       {
-        url: "https://pdfmerge.page/image.jpg",
-        width: 800,
-        height: 600,
-        alt: "PDF Merge Page",
+        url: "https://pdfmerge.page/web-app-manifest-512x512.png",
+        width: 512,
+        height: 512,
+        alt: "pdfmerge.page",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Merge PDF Files Online | pdfmerge.page",
+    description: "Merge and reorder PDF files in-browser with zero signup.",
+    images: ["https://pdfmerge.page/web-app-manifest-512x512.png"],
   },
 };
 
@@ -27,21 +40,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
-      <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-      <link rel="shortcut icon" href="/favicon.ico" />
-      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-      <meta name="apple-mobile-web-app-title" content="PDF Merge" />
-      <link rel="manifest" href="/site.webmanifest" />
-        {/* Additional SEO tags can be added here */}
-      <meta name="msvalidate.01" content="F5D5A440425F87F3A7CCC08D130D4A56" />
-      <script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2884926940370507"
-        crossOrigin="anonymous"
-      ></script>
+        <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <meta name="apple-mobile-web-app-title" content="PDF Merge" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="msvalidate.01" content="F5D5A440425F87F3A7CCC08D130D4A56" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={`${manrope.variable} font-sans`}>
+        {children}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2884926940370507"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+      </body>
     </html>
   );
 }

@@ -1,0 +1,29 @@
+keyword,cluster,intent,impressions,clicks,slug,status,priority,target_h1,primary_cta,secondary_cta,notes
+merge pdf,generic,transactional,108,0,/,live,p0,Merge PDF Files Online in Seconds,Merge PDFs now,Open keyword-specific merge guides,Homepage targets broad merge intent
+pdfmerge,brand,transactional,41,0,/pdfmerge,live,p0,pdfmerge: Merge PDFs Without Leaving Your Browser,Use pdfmerge now,Compare with PDFMerger flow,Highest branded demand from current GSC data
+pdfmerger,generic,transactional,32,0,/pdfmerger,live,p0,PDFMerger Workflow for Clean Ordered Output,Start PDFMerger flow,Open PDF merge guide,Strong direct tool intent
+pdf merge,generic,transactional,19,0,/pdf-merge,live,p1,PDF Merge Online with Drag-and-Drop Ordering,Run a PDF merge now,See page-order merge options,Direct synonym cluster for broad intent
+pdf merger,workflow,transactional,7,0,/pdf-merger,live,p1,PDF Merger for Sequence-Critical Document Packs,Use PDF merger,Open merge-pdf-pages page,Targets packet/sequence use cases
+pdf page merge,page-order,transactional,5,0,/pdf-page-merge,live,p1,PDF Page Merge for Better Page Flow,Merge PDF pages now,Open PDF page merger,Targets page-flow-specific intent
+pdf page merger,page-order,transactional,2,0,/pdf-page-merger,live,p2,PDF Page Merger for Multi-Source Document Sets,Start PDF page merger,See merge PDF pages route,Targets multi-source packet intent
+merge pdf pages,workflow,transactional,2,0,/merge-pdf-pages,live,p2,Merge PDF Pages Without Uploading to a Server,Merge pages now,Open pdfmerge page,Privacy-first workflow angle
+merge pdf files,generic,transactional,0,0,/merge-pdf-files,live,p1,Merge Pdf Files with Browser-Based Output,Merge PDF files now,Open pdfmerge page,Expansion route now live
+combine pdf files,generic,transactional,0,0,/combine-pdf-files,live,p1,Combine Pdf Files with Browser-Based Output,Combine files now,Open PDFMerger flow,Expansion route now live
+merge pdf online,generic,transactional,0,0,/merge-pdf-online,live,p1,Merge Pdf Online with Browser-Based Output,Merge PDF online,Open PDF merge page,Expansion route now live
+combine pdf pages,page-order,transactional,0,0,/combine-pdf-pages,live,p2,Combine Pdf Pages with Browser-Based Output,Combine PDF pages,Open PDF page merge,Expansion route now live
+merge multiple pdf,workflow,transactional,0,0,/merge-multiple-pdf,live,p2,Merge Multiple Pdf with Browser-Based Output,Merge multiple PDFs,Open merge pdf files route,Expansion route now live
+merge pdf docs,workflow,transactional,0,0,/merge-pdf-docs,live,p2,Merge Pdf Docs with Browser-Based Output,Merge PDF docs now,Open combine pdf files route,Expansion route now live
+pdf combine online,generic,transactional,0,0,/pdf-combine-online,live,p2,Pdf Combine Online with Browser-Based Output,Combine online now,Open merge pdf online,Expansion route now live
+merge scanned pdf,workflow,transactional,0,0,/merge-scanned-pdf,live,p2,Merge Scanned Pdf with Browser-Based Output,Merge scanned PDFs,Open merge documents route,Expansion route now live
+merge documents into one pdf,workflow,transactional,0,0,/merge-documents-into-one-pdf,live,p2,Merge Documents Into One Pdf with Browser-Based Output,Merge documents now,Open merge pdf files route,Expansion route now live
+reorder and merge pdf,page-order,transactional,0,0,/reorder-and-merge-pdf,live,p2,Reorder And Merge Pdf with Browser-Based Output,Reorder and merge now,Open PDF page merger,Expansion route now live
+secure pdf merger,privacy,transactional,0,0,/secure-pdf-merger,live,p2,Secure Pdf Merger with Browser-Based Output,Start secure merge,Open private PDF merger,Expansion route now live
+private pdf merger,privacy,transactional,0,0,/private-pdf-merger,live,p2,Private Pdf Merger with Browser-Based Output,Run private merge,Open secure PDF merger,Expansion route now live
+free pdf merger,generic,transactional,0,0,/free-pdf-merger,live,p2,Free Pdf Merger with Browser-Based Output,Use free merger now,Open no-signup merger,Expansion route now live
+no signup pdf merger,generic,transactional,0,0,/no-signup-pdf-merger,live,p2,No Signup Pdf Merger with Browser-Based Output,Merge with no signup,Open free PDF merger,Expansion route now live
+merge pdf for invoices,use-case,transactional,0,0,/merge-pdf-for-invoices,live,p3,Merge Pdf For Invoices with Browser-Based Output,Merge invoice PDFs,Open reports merge page,Expansion route now live
+merge pdf for reports,use-case,transactional,0,0,/merge-pdf-for-reports,live,p3,Merge Pdf For Reports with Browser-Based Output,Merge report PDFs,Open merge documents route,Expansion route now live
+merge pdf for legal documents,use-case,transactional,0,0,/merge-pdf-for-legal-documents,live,p3,Merge Pdf For Legal Documents with Browser-Based Output,Merge legal PDFs,Open reorder and merge page,Expansion route now live
+merge pdf on mobile,device,transactional,0,0,/merge-pdf-on-mobile,live,p3,Merge Pdf On Mobile with Browser-Based Output,Merge on mobile,Open merge PDF online,Expansion route now live
+merge pdf on mac,device,transactional,0,0,/merge-pdf-on-mac,live,p3,Merge Pdf On Mac with Browser-Based Output,Merge on Mac,Open no-signup merger,Expansion route now live
+merge pdf on windows,device,transactional,0,0,/merge-pdf-on-windows,live,p3,Merge Pdf On Windows with Browser-Based Output,Merge on Windows,Open merge PDF files route,Expansion route now live
