@@ -72,9 +72,9 @@ const homeLanding: LandingPage = {
   heroDescription:
     "Combine multiple PDFs into a single download without sending your files to a server. Drop files, reorder pages, and export.",
   heroSupport:
-    "This page is built for fast action: upload, sort, merge, and download in one flow. Use the keyword-specific pages below if you want a workflow tailored to your exact search intent.",
+    "This page is built for fast action: upload, sort, merge, and download in one flow. Choose the route that matches your workflow and start immediately.",
   primaryCtaLabel: "Merge PDFs now",
-  secondaryCtaLabel: "Open keyword-specific merge guides",
+  secondaryCtaLabel: "Open related merge guides",
   audience: [
     "Students combining notes, slides, and assignments before submission deadlines.",
     "Operations and finance teams packaging reports, invoices, or contracts for one delivery.",
@@ -1323,7 +1323,7 @@ const expansionSeeds: ExpansionSeed[] = [
     primaryCtaLabel: "Combine online now",
     secondaryCtaLabel: "Open merge pdf online",
     audience: [
-      "Users searching non-standard keyword phrasing around combine intent.",
+      "Users searching non-standard combine phrasing.",
       "Teams needing no-install browser workflows.",
       "People packaging final attachments before sending.",
     ],

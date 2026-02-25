@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PseoLandingPage } from "@/components/PseoLandingPage";
-import { buildLandingMetadata, getKeywordLandingPageBySlug, getRelatedLandingPages, staticKeywordSlugs } from "@/app/lib/pseo";
+import { buildLandingMetadata, getKeywordLandingPageBySlug, staticKeywordSlugs } from "@/app/lib/pseo";
 
 export const revalidate = 3600;
 export const dynamicParams = false;
@@ -33,5 +33,5 @@ export default function KeywordLandingPage({ params }: LandingRouteProps) {
     notFound();
   }
 
-  return <PseoLandingPage page={page} relatedPages={getRelatedLandingPages(page.id, 6)} />;
+  return <PseoLandingPage page={page} />;
 }

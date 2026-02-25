@@ -1,15 +1,14 @@
 import Link from "next/link";
 import { breadcrumbJsonLd, faqJsonLd, howToJsonLd, softwareApplicationJsonLd } from "@/app/lib/jsonLd";
-import { absoluteUrl, type LandingPage } from "@/app/lib/pseo";
+import { type LandingPage } from "@/app/lib/pseo";
 import { PdfMergeTool } from "@/components/PdfMergeTool";
 import { PseoAnalyticsTracker } from "@/components/PseoAnalyticsTracker";
 
 type PseoLandingPageProps = {
   page: LandingPage;
-  relatedPages: LandingPage[];
 };
 
-export function PseoLandingPage({ page, relatedPages }: PseoLandingPageProps) {
+export function PseoLandingPage({ page }: PseoLandingPageProps) {
   const analyticsContext = {
     pageId: page.id,
     keyword: page.keyword,
@@ -35,7 +34,6 @@ export function PseoLandingPage({ page, relatedPages }: PseoLandingPageProps) {
     path: page.path,
   });
 
-  const secondaryLink = relatedPages[0];
   const sectionCardClass =
     "rounded-[24px] border border-slate-200/80 bg-white/92 p-6 shadow-[0_22px_55px_-45px_rgba(15,23,42,0.6)] backdrop-blur sm:p-8";
   const sectionHeadingClass = "text-2xl font-extrabold tracking-tight text-slate-900";
@@ -61,15 +59,6 @@ export function PseoLandingPage({ page, relatedPages }: PseoLandingPageProps) {
             <a href="#merge-tool" className="transition hover:text-[#137fec]">
               Tool
             </a>
-            <Link
-              href="/merge-pdf-guides"
-              data-pseo-event="pseo_internal_link_click"
-              data-pseo-location="header_guides_hub"
-              data-pseo-label="Browse all merge guides"
-              className="transition hover:text-[#137fec]"
-            >
-              Guides
-            </Link>
             <Link href="/" className="transition hover:text-[#137fec]">
               Home
             </Link>
@@ -92,9 +81,8 @@ export function PseoLandingPage({ page, relatedPages }: PseoLandingPageProps) {
             <div className="absolute right-[-110px] top-[-90px] h-60 w-60 rounded-full bg-blue-100/70 blur-3xl" />
             <div className="absolute bottom-[-120px] left-[-80px] h-56 w-56 rounded-full bg-sky-100/70 blur-3xl" />
           </div>
-          <div className="relative grid gap-8 lg:grid-cols-[minmax(0,1fr)_17rem]">
+          <div className="relative">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-sky-700">Programmatic SEO Landing</p>
               <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">{page.h1}</h1>
               <p className="mt-4 text-base leading-relaxed text-slate-700">{page.heroDescription}</p>
               <p className="mt-3 text-sm leading-relaxed text-slate-600">{page.heroSupport}</p>
@@ -108,57 +96,14 @@ export function PseoLandingPage({ page, relatedPages }: PseoLandingPageProps) {
                 >
                   {page.primaryCtaLabel}
                 </a>
-                {secondaryLink ? (
-                  <Link
-                    href={secondaryLink.path}
-                    data-pseo-event="pseo_cta_click"
-                    data-pseo-location="hero_secondary"
-                    data-pseo-label={page.secondaryCtaLabel}
-                    className="inline-flex items-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-100"
-                  >
-                    {page.secondaryCtaLabel}
-                  </Link>
-                ) : null}
-                <Link
-                  href="/merge-pdf-guides"
-                  data-pseo-event="pseo_internal_link_click"
-                  data-pseo-location="hero_guides_hub"
-                  data-pseo-label="Browse all merge guides"
-                  className="inline-flex items-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-100"
-                >
-                  Browse all merge guides
-                </Link>
-              </div>
-              <div className="mt-6 flex flex-wrap gap-2 text-xs text-slate-500">
-                <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1">Keyword: {page.keyword}</span>
-                <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1">Intent: {page.intent}</span>
-                {page.impressions > 0 ? (
-                  <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1">
-                    {page.impressions} tracked impressions
-                  </span>
-                ) : null}
               </div>
             </div>
-            <aside className="rounded-2xl border border-slate-200 bg-slate-50/85 p-4">
-              <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">Page Metadata</p>
-              <ul className="mt-3 space-y-2 text-xs text-slate-700">
-                <li className="rounded-lg bg-white px-3 py-2">
-                  <span className="font-semibold text-slate-900">Canonical:</span> {absoluteUrl(page.path)}
-                </li>
-                <li className="rounded-lg bg-white px-3 py-2">
-                  <span className="font-semibold text-slate-900">Path:</span> {page.path}
-                </li>
-                <li className="rounded-lg bg-white px-3 py-2">
-                  <span className="font-semibold text-slate-900">Keyword family:</span> {page.keyword}
-                </li>
-              </ul>
-            </aside>
           </div>
         </section>
 
         <div className="mt-8">
           <PdfMergeTool
-            heading={`Try "${page.keyword}" right now`}
+            heading="Try the merge tool right now"
             description="Upload at least two PDF files, reorder with drag-and-drop, then merge into one downloadable file."
             buttonLabel={page.primaryCtaLabel}
             analyticsContext={analyticsContext}
@@ -177,7 +122,7 @@ export function PseoLandingPage({ page, relatedPages }: PseoLandingPageProps) {
         </section>
 
         <section className={`mt-8 ${sectionCardClass}`}>
-          <h2 className={sectionHeadingClass}>Why this {page.keyword} page converts</h2>
+          <h2 className={sectionHeadingClass}>Why this page converts</h2>
           <div className="mt-4 grid gap-4 md:grid-cols-3">
             {page.valueProps.map((item, index) => (
               <article
@@ -193,7 +138,7 @@ export function PseoLandingPage({ page, relatedPages }: PseoLandingPageProps) {
         </section>
 
         <section className={`mt-8 ${sectionCardClass}`}>
-          <h2 className={sectionHeadingClass}>3-step workflow for {page.keyword}</h2>
+          <h2 className={sectionHeadingClass}>3-step workflow</h2>
           <ol className="mt-5 grid gap-4 md:grid-cols-3">
             {page.workflow.map((step, index) => (
               <li key={step.title} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
@@ -218,7 +163,7 @@ export function PseoLandingPage({ page, relatedPages }: PseoLandingPageProps) {
         </section>
 
         <section className={`mt-8 ${sectionCardClass}`}>
-          <h2 className={sectionHeadingClass}>Best use cases for {page.keyword}</h2>
+          <h2 className={sectionHeadingClass}>Best use cases</h2>
           <ul className="mt-4 grid gap-3 text-sm text-slate-700 md:grid-cols-2">
             {page.useCases.map((item) => (
               <li key={item} className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
@@ -241,45 +186,10 @@ export function PseoLandingPage({ page, relatedPages }: PseoLandingPageProps) {
         </section>
 
         <section className={`mt-8 ${sectionCardClass}`}>
-          <h2 className={sectionHeadingClass}>Related PDF merge pages</h2>
-          <p className="mt-2 text-sm text-slate-600">
-            Explore adjacent intent pages for broader keyword coverage and clearer crawl pathways.
-          </p>
-          <p className="mt-1 text-sm text-slate-600">
-            Need the full map?{" "}
-            <Link
-              href="/merge-pdf-guides"
-              data-pseo-event="pseo_internal_link_click"
-              data-pseo-location="related_pages_hub_link"
-              data-pseo-label="PDF Merge Guides hub"
-              className="font-semibold text-slate-800 underline decoration-slate-300 underline-offset-4 transition hover:decoration-slate-500"
-            >
-              Open the PDF Merge Guides hub
-            </Link>
-            .
-          </p>
-          <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {relatedPages.map((relatedPage) => (
-              <li key={relatedPage.id}>
-                <Link
-                  href={relatedPage.path}
-                  data-pseo-event="pseo_internal_link_click"
-                  data-pseo-location="related_pages"
-                  data-pseo-label={relatedPage.keyword}
-                  className="block rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-800 transition hover:border-slate-400 hover:bg-slate-100"
-                >
-                  {relatedPage.keyword}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <section className={`mt-8 ${sectionCardClass}`}>
           <h2 className={sectionHeadingClass}>Next steps</h2>
           <p className="mt-3 text-sm leading-relaxed text-slate-700">
-            Use the merge tool above to ship your final PDF now. If you handle recurring merges, bookmark this route and
-            the related intent pages so each workflow starts with the right template.
+            Use the merge tool above to ship your final PDF now. If you handle recurring merges, bookmark this route so
+            each workflow starts faster.
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
             <a
@@ -299,15 +209,6 @@ export function PseoLandingPage({ page, relatedPages }: PseoLandingPageProps) {
               className="inline-flex items-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-100"
             >
               Open main merge page
-            </Link>
-            <Link
-              href="/merge-pdf-guides"
-              data-pseo-event="pseo_internal_link_click"
-              data-pseo-location="next_steps_guides_hub"
-              data-pseo-label="Browse all merge guides"
-              className="inline-flex items-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-100"
-            >
-              Browse all merge guides
             </Link>
           </div>
         </section>

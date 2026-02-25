@@ -38,7 +38,7 @@ export default function MergePdfGuidesPage() {
     intent,
     pages: pages
       .filter((page) => page.intent === intent)
-      .sort((left, right) => right.impressions - left.impressions || left.keyword.localeCompare(right.keyword)),
+      .sort((left, right) => right.impressions - left.impressions || left.h1.localeCompare(right.h1)),
   }));
 
   return (
@@ -52,7 +52,7 @@ export default function MergePdfGuidesPage() {
             intent so visitors can move from broad terms to exact workflows fast.
           </p>
           <div className="mt-6 flex flex-wrap gap-2 text-xs text-slate-500">
-            <span className="rounded-full bg-slate-100 px-3 py-1">{pages.length} live keyword routes</span>
+            <span className="rounded-full bg-slate-100 px-3 py-1">{pages.length} live guide routes</span>
             <Link href="/" className="rounded-full bg-slate-100 px-3 py-1 font-semibold text-slate-700 hover:bg-slate-200">
               Open main merge tool
             </Link>
@@ -62,7 +62,7 @@ export default function MergePdfGuidesPage() {
         {grouped.map((group) =>
           group.pages.length ? (
             <section key={group.intent} className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-900/5 sm:p-8">
-              <h2 className="text-2xl font-bold tracking-tight text-slate-900">{intentLabels[group.intent]} queries</h2>
+              <h2 className="text-2xl font-bold tracking-tight text-slate-900">{intentLabels[group.intent]} guides</h2>
               <p className="mt-2 text-sm text-slate-600">
                 Routes focused on {intentLabels[group.intent].toLowerCase()} intent and conversion into immediate merge actions.
               </p>
@@ -73,7 +73,7 @@ export default function MergePdfGuidesPage() {
                       href={page.path}
                       className="block rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-800 transition hover:border-slate-400 hover:bg-slate-100"
                     >
-                      {page.keyword}
+                      {page.h1}
                     </Link>
                   </li>
                 ))}
