@@ -81,3 +81,9 @@ In order to enable the example:
 After doing this you can run the `dev` or `preview` script and visit the `/api/hello` route to see the example in action.
 
 Finally, if you also want to see the example work in the deployed application make sure to add a `MY_KV_NAMESPACE` binding to your Pages application in its [dashboard kv bindings settings section](https://dash.cloudflare.com/?to=/:account/pages/view/:pages-project/settings/functions#kv_namespace_bindings_section). After having configured it make sure to re-deploy your application.
+
+## IndexNow
+
+- The IndexNow verification key is served from the site root at `/90a898271e1d41268e60f5d29b838683.txt`.
+- When submitting URLs manually, use `keyLocation = https://pdfmerge.page/90a898271e1d41268e60f5d29b838683.txt`.
+- Local smoke check: run `pnpm dev`, then `curl http://localhost:3000/90a898271e1d41268e60f5d29b838683.txt`.
